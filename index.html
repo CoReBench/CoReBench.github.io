@@ -249,6 +249,31 @@
       letter-spacing: 0.5px;
       font-size: 0.95rem;
       position: relative;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.3s ease;
+    }
+
+    th:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-1px);
+    }
+
+    th.sortable::after {
+      content: ' ↕️';
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-left: 0.5rem;
+    }
+
+    th.sort-asc::after {
+      content: ' ⬆️';
+      opacity: 1;
+    }
+
+    th.sort-desc::after {
+      content: ' ⬇️';
+      opacity: 1;
     }
 
     th:first-child {
@@ -480,6 +505,9 @@ To ensure semantic diversity and reasoning complexity, we propose a semantics-aw
 
   <!-- Dynamic Table Loading and Tab Switching Script -->
   <script>
+    // Store original data for each table
+    const tableData = {};
+
     // CSV loading and table generation functions
     async function loadCSV(filename) {
       try {
@@ -508,21 +536,105 @@ To ensure semantic diversity and reasoning complexity, we propose a semantics-aw
       }).join('');
     }
 
-    async function loadTable(csvName, tbodyId) {
+    // Sorting function
+    function sortTable(tableId, columnIndex, ascending = false) {
+      const data = [...tableData[tableId]]; // Create a copy to avoid mutating original
+
+      data.sort((a, b) => {
+        let aVal = a[columnIndex];
+        let bVal = b[columnIndex];
+
+        // Check if values are numeric
+        const aNum = parseFloat(aVal);
+        const bNum = parseFloat(bVal);
+
+        if (!isNaN(aNum) && !isNaN(bNum)) {
+          // Numeric comparison - default to descending (high to low)
+          return ascending ? aNum - bNum : bNum - aNum;
+        } else {
+          // String comparison - for model names
+          return ascending ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+        }
+      });
+
+      // Update table display
+      const tbody = document.getElementById(tableId + '-tbody');
+      if (tbody) {
+        tbody.innerHTML = generateTableRows(data);
+      }
+    }
+
+    // Add sorting functionality to table headers
+    function makeSortable(tableId) {
+      const table = document.getElementById(tableId + '-table');
+      if (!table) return;
+
+      const headers = table.querySelectorAll('th');
+      headers.forEach((header, index) => {
+        // Skip if already made sortable to prevent duplicate event listeners
+        if (header.classList.contains('sortable')) return;
+
+        header.classList.add('sortable');
+
+        header.addEventListener('click', () => {
+          // Clear other headers' sort classes but keep current header's direction
+          headers.forEach(h => {
+            if (h !== header) {
+              h.classList.remove('sort-asc', 'sort-desc');
+              h.dataset.sortDirection = '';
+            }
+          });
+
+          // Determine sort direction - toggle between desc and asc
+          let ascending;
+          if (header.dataset.sortDirection === 'desc') {
+            // Currently descending, switch to ascending
+            ascending = true;
+            header.classList.remove('sort-desc');
+            header.classList.add('sort-asc');
+            header.dataset.sortDirection = 'asc';
+          } else {
+            // Default or ascending, switch to descending (high to low)
+            ascending = false;
+            header.classList.remove('sort-asc');
+            header.classList.add('sort-desc');
+            header.dataset.sortDirection = 'desc';
+          }
+
+          // Sort the table
+          sortTable(tableId, index, ascending);
+        });
+      });
+    }
+
+    async function loadTable(csvName, tbodyId, tableId) {
       const data = await loadCSV(csvName);
       const tbody = document.getElementById(tbodyId);
       if (tbody && data.length > 0) {
+        // Store original data using the tableId so sorting can find it
+        tableData[tableId] = data;
+
         tbody.innerHTML = generateTableRows(data);
+
+        // Make table sortable using the tableId
+        makeSortable(tableId);
       }
     }
 
     // Load all tables on page load
     document.addEventListener('DOMContentLoaded', async () => {
       await Promise.all([
-        loadTable('dep_classification', 'dep-tbody'),
-        loadTable('trace', 'trace-tbody'),
-        loadTable('enum', 'enum-tbody')
+        loadTable('dep_classification', 'dep-tbody', 'dep'),
+        loadTable('trace', 'trace-tbody', 'trace'),
+        loadTable('enum', 'enum-tbody', 'enum')
       ]);
+
+      // Ensure all tables are sortable after a short delay
+      setTimeout(() => {
+        makeSortable('dep');
+        makeSortable('trace');
+        makeSortable('enum');
+      }, 100);
     });
 
     // Tab switching functionality
