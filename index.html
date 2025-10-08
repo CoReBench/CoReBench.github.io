@@ -614,15 +614,15 @@ To ensure semantic diversity and reasoning complexity, we propose a semantics-aw
       }
     }
 
-    // Add sorting functionality to table headers
+    // Add sorting functionality to table headers (skip first column)
     function makeSortable(tableId) {
       const table = document.getElementById(tableId + '-table');
       if (!table) return;
 
       const headers = table.querySelectorAll('th');
       headers.forEach((header, index) => {
-        // Skip if already made sortable to prevent duplicate event listeners
-        if (header.classList.contains('sortable')) return;
+        // Skip first column (index 0) and already sortable headers
+        if (index === 0 || header.classList.contains('sortable')) return;
 
         header.classList.add('sortable');
 
