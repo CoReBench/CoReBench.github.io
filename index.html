@@ -150,6 +150,29 @@
       color: #000;
     }
 
+    /* NeurIPS spotlight badge */
+    .spotlight-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: linear-gradient(135deg, #8db55a 0%, #a8c47a 100%);
+      color: white;
+      padding: 0.5rem 1.2rem;
+      border-radius: 1.5rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.3px;
+      box-shadow: 0 2px 10px rgba(141, 181, 90, 0.2);
+      margin: 0.8rem 0 1.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .spotlight-badge:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(141, 181, 90, 0.3);
+    }
+
     /* card */
     .card {
       background: rgba(255, 255, 255, 0.95);
@@ -429,7 +452,10 @@
 <body>
   <header class="container hero center">
     <h1>CoRe🥑</h1>
-    <p class="center">Benchmarking LLMs’ Code Reasoning
+    <a href="https://neurips.cc/Conferences/2025/CallForDatasetsBenchmarks" target="_blank" class="spotlight-badge">
+      ⭐ NeurIPS 2025 D&B Track Spotlight ⭐
+    </a>
+    <p class="center">Benchmarking LLMs' Code Reasoning
 Capabilities through Static Analysis Tasks</p>
     <div class="buttons">
       <a class="btn paper" href="https://arxiv.org/abs/2507.05269" target="_blank">📄 Paper</a>
