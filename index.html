@@ -139,10 +139,16 @@
       font-size: 0.85rem;
     }
 
-    /* override citation code to stay light */
+    /* colorful citation with light background */
     .citation-card pre {
-      background: #f5f5f5;
-      color: var(--primary);
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      color: #24292e;
+    }
+    .citation-card code {
+      background: transparent;
+      color: #24292e;
+      font-family: 'Fira Mono', monospace;
     }
   </style>
 </head>
@@ -254,14 +260,12 @@ To ensure semantic diversity and reasoning complexity, we propose a semantics-aw
     <!-- Citation -->
     <section class="card citation-card">
       <h2>Citation</h2>
-      <pre>
-@article{xie2025core,
+      <pre><code class="citation-code">@article{xie2025core,
   title={CORE: Benchmarking LLMs Code Reasoning Capabilities through Static Analysis Tasks},
   author={Xie, Danning and Zheng, Mingwei and Liu, Xuwei and Wang, Jiannan and Wang, Chengpeng and Tan, Lin and Zhang, Xiangyu},
   journal={arXiv preprint arXiv:2507.05269},
   year={2025}
-}
-</pre>
+}</code></pre>
     </section>
   </main>
 
