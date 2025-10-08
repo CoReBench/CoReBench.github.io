@@ -36,16 +36,51 @@
     body {
       font-family: 'Inter', sans-serif;
       color: var(--primary);
-      background: #f7f8fa;
+      background: linear-gradient(135deg, #f0f8e8 0%, #e8f5d0 100%);
+      background-attachment: fixed;
       line-height: 1.5;
+      min-height: 100vh;
     }
 
-    a { color: var(--accent); text-decoration: none; }
+    /* animated background overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(-45deg, #a4c47a, #7ba428, #9bc53d, #c8e6a0);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      opacity: 0.15;
+      z-index: -1;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: all 0.3s ease; }
+    a:hover { transform: translateY(-1px); }
     h1, h2, h3 { font-weight: 700; margin-bottom: 0.25rem; }
-    h1 { font-size: 2.5rem; }
+    h1 {
+      font-size: 3.5rem;
+      color: #5a7c1a;
+      text-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      animation: titleFloat 3s ease-in-out infinite alternate;
+      font-weight: 800;
+    }
     h2 { font-size: 1.75rem; text-align: center; }
     h3 { font-size: 1.25rem; text-align: center; }
     p { color: var(--secondary); }
+
+    @keyframes titleFloat {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-10px); }
+    }
 
     /* layout helpers */
     .container {
@@ -69,25 +104,90 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.6rem 1.25rem;
-      border-radius: 0.5rem;
-      font-weight: 500;
+      padding: 0.8rem 1.5rem;
+      border-radius: 2rem;
+      font-weight: 600;
       color: #fff;
-      transition: transform 0.15s ease;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 0.9rem;
     }
-    .btn:hover { transform: translateY(-2px); }
-    .btn svg { width: 1rem; height: 1rem; }
-    .btn.paper   { background: var(--paper); }
-    .btn.github  { background: var(--github); }
-    .btn.hf      { background: var(--hf); color: #000; }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    .btn:hover::before { left: 100%; }
+
+    .btn:active { transform: translateY(-2px) scale(1.02); }
+
+    .btn svg { width: 1.2rem; height: 1.2rem; }
+
+    .btn.paper   {
+      background: linear-gradient(135deg, var(--paper) 0%, #d32f2f 100%);
+    }
+    .btn.github  {
+      background: linear-gradient(135deg, var(--github) 0%, #333 100%);
+    }
+    .btn.hf      {
+      background: linear-gradient(135deg, var(--hf) 0%, #ffc107 100%);
+      color: #000;
+    }
 
     /* card */
     .card {
-      background: var(--card-bg);
-      border-radius: 1rem;
-      box-shadow: 0 2px 6px var(--card-shadow);
-      padding: 1.5rem 1.25rem;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 1.5rem;
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        0 4px 16px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 2rem 1.5rem;
       margin-bottom: 2rem;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.15),
+        0 8px 24px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .card:hover::before {
+      left: 100%;
     }
 
     /* tabs */
