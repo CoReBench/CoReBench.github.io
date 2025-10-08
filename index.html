@@ -560,7 +560,6 @@ To ensure semantic diversity and reasoning complexity, we propose a semantics-aw
           .filter(line => line.trim().length > 0)
           .map(line => line.split(','));
       } catch (error) {
-        console.error(`Error loading ${filename}.csv:`, error);
         return [];
       }
     }
