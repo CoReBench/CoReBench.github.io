@@ -365,11 +365,23 @@
       border-right: 3px solid #8db55a;
     }
 
-
     /* numeric value highlighting */
     td:not(:first-child) {
       font-weight: 600;
       font-family: 'Fira Mono', monospace;
+    }
+
+    /* acronym highlighting for title expansion */
+    .acronym-highlight {
+      color: #5a7c1a;
+      font-weight: 800;
+      font-size: 1.3em;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .title-expansion {
+      color: var(--secondary);
+      font-weight: 400;
     }
 
     /* top performers highlighting - medals only on model names */
@@ -451,12 +463,11 @@
 </head>
 <body>
   <header class="container hero center">
-    <h1>CoRe🥑</h1>
+    <h1>CoRe 🥑</h1>
     <a href="https://neurips.cc/Conferences/2025/CallForDatasetsBenchmarks" target="_blank" class="spotlight-badge">
       ⭐ NeurIPS 2025 D&B Track Spotlight ⭐
     </a>
-    <p class="center">Benchmarking LLMs' Code Reasoning
-Capabilities through Static Analysis Tasks</p>
+    <p class="center">Benchmarking LLMs' <span class="acronym-highlight">Co</span><span class="title-expansion">de</span> <span class="acronym-highlight">Re</span><span class="title-expansion">asoning</span> Capabilities through Static Analysis Tasks</p>
     <div class="buttons">
       <a class="btn paper" href="https://arxiv.org/abs/2507.05269" target="_blank">📄 Paper</a>
       <a class="btn github" href="https://github.com/CoReBench/CoRe" target="_blank">🐙 GitHub</a>
