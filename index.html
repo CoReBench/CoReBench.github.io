@@ -164,6 +164,87 @@ To ensure semantic diversity and reasoning complexity, we propose a semantics-aw
       </p>
     </section>
 
+    <!-- Leaderboard Tabs -->
+    <section class="card" id="leaderboard-card">
+      <div class="tabs">
+        <div class="tab active" data-target="dep">Dependency Classification</div>
+        <div class="tab" data-target="trace">Trace Generation</div>
+        <div class="tab" data-target="enum">Dependency Source Enumeration</div>
+      </div>
+
+      <!-- Dependency Classification -->
+      <div class="tab-content active" id="dep">
+        <h3>F1 Score</h3>
+        <div class="tbl-wrapper">
+          <table>
+            <thead>
+              <tr><th>Model</th><th>Data Dependency</th><th>Control Dependency</th><th>Information Flow</th><th>Overall</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>GPT o3</td><td>93.24</td><td>92.11</td><td>92.13</td><td>92.56</td></tr>
+              <tr><td>Gemini 2.5 Pro</td><td>88.53</td><td>92.49</td><td>94.79</td><td>91.74</td></tr>
+              <tr><td>GPT o4-mini</td><td>84.7</td><td>91.98</td><td>84.08</td><td>86.74</td></tr>
+              <tr><td>DeepSeek R1</td><td>83.29</td><td>92.28</td><td>83.59</td><td>86.18</td></tr>
+              <tr><td>Claude 3.7</td><td>76.94</td><td>88.84</td><td>81.57</td><td>82.07</td></tr>
+              <tr><td>Qwen3 235B</td><td>82.33</td><td>89</td><td>69.51</td><td>80.31</td></tr>
+              <tr><td>Claude 3.5</td><td>70.67</td><td>78.36</td><td>84.06</td><td>77.27</td></tr>
+              <tr><td>DeepSeek V3</td><td>71.77</td><td>79.48</td><td>76.88</td><td>75.8</td></tr>
+              <tr><td>GPT 4o</td><td>69.75</td><td>77.11</td><td>76.63</td><td>74.16</td></tr>
+              <tr><td>Llama 3.1 405B</td><td>63.15</td><td>70.3</td><td>74.49</td><td>68.93</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Trace Generation -->
+      <div class="tab-content" id="trace">
+        <h3>Correct Trace Rate (%)</h3>
+        <div class="tbl-wrapper">
+          <table>
+            <thead>
+              <tr><th>Model</th><th>Data Dependency</th><th>Control Dependency</th><th>Information Flow</th><th>Overall</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Gemini 2.5 Pro</td><td>90.38</td><td>92.26</td><td>68.66</td><td>84.02</td></tr>
+              <tr><td>GPT o3</td><td>86.23</td><td>77.52</td><td>52.37</td><td>72.8</td></tr>
+              <tr><td>GPT o4-mini</td><td>70.39</td><td>66.83</td><td>42.32</td><td>60.43</td></tr>
+              <tr><td>DeepSeek R1</td><td>67.31</td><td>66.62</td><td>39.58</td><td>58.36</td></tr>
+              <tr><td>Claude 3.7</td><td>69.29</td><td>60.04</td><td>39.9</td><td>57.13</td></tr>
+              <tr><td>Qwen3 235B</td><td>65.48</td><td>59.19</td><td>29.85</td><td>52.26</td></tr>
+              <tr><td>Claude 3.5</td><td>54.19</td><td>57.34</td><td>35.9</td><td>49.43</td></tr>
+              <tr><td>GPT 4o</td><td>61.85</td><td>43.15</td><td>22.53</td><td>43.56</td></tr>
+              <tr><td>DeepSeek V3</td><td>56.37</td><td>40.27</td><td>23.66</td><td>41.08</td></tr>
+              <tr><td>Llama 3.1 405B</td><td>39.5</td><td>27.77</td><td>15.98</td><td>28.48</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Dependency Source Enumeration -->
+      <div class="tab-content" id="enum">
+        <h3>Exact Match (%)</h3>
+        <div class="tbl-wrapper">
+          <table>
+            <thead>
+              <tr><th>Model</th><th>Data Dependency</th><th>Control Dependency</th><th>Information Flow</th><th>Overall</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Gemini 2.5 Pro</td><td>49.43</td><td>75.66</td><td>26.73</td><td>50.25</td></tr>
+              <tr><td>GPT o3</td><td>41.89</td><td>70.9</td><td>15.61</td><td>42.61</td></tr>
+              <tr><td>GPT o4-mini</td><td>29.11</td><td>61.76</td><td>8.9</td><td>32.89</td></tr>
+              <tr><td>DeepSeek R1</td><td>38.88</td><td>48.37</td><td>7.12</td><td>31.82</td></tr>
+              <tr><td>Claude 3.7</td><td>20.58</td><td>51.7</td><td>6.92</td><td>25.82</td></tr>
+              <tr><td>Qwen3 235B</td><td>21.36</td><td>44.61</td><td>4.74</td><td>23.3</td></tr>
+              <tr><td>Claude 3.5</td><td>11.14</td><td>40.46</td><td>7.72</td><td>19.13</td></tr>
+              <tr><td>GPT 4o</td><td>12.28</td><td>29.06</td><td>2.97</td><td>14.52</td></tr>
+              <tr><td>DeepSeek V3</td><td>15.95</td><td>21.33</td><td>2.58</td><td>13.38</td></tr>
+              <tr><td>Llama 3.1 405B</td><td>2.96</td><td>5.35</td><td>1.59</td><td>3.28</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
 
     <!-- Citation -->
     <section class="card citation-card">
