@@ -139,6 +139,26 @@
       font-size: 0.85rem;
     }
 
+    /* attractive section titles */
+    .section-title {
+      color: var(--primary);
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      position: relative;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 400px;
+      height: 4px;
+      background: linear-gradient(90deg, #7ba428 0%, #9bc53d 25%, #f1c40f 50%, #e67e22 75%, #e74c3c 100%);
+      margin: 0.5rem auto;
+      border-radius: 2px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
     /* colorful citation with light background */
     .citation-card pre {
       background: #f8f9fa;
@@ -167,7 +187,7 @@ Capabilities through Static Analysis Tasks</p>
   <main class="container">
     <!-- Overview -->
     <section class="card">
-      <h2>Overview</h2>
+      <h2 class="section-title">💡 Overview</h2>
       <p style="text-align:left; max-width: 800px; margin: 0.5rem auto 0;">
         CoRe is a high-quality, human-verified benchmark designed to evaluate LLMs on fundamental static analysis tasks. CoRe includes 12,553 task instances spanning data dependency, control dependency, and information flow across programs written in C/C++, Java, and Python.
 To ensure semantic diversity and reasoning complexity, we propose a semantics-aware diverse sampling strategy that selects targets and task instances based on structural coverage and dependency depth.
@@ -177,6 +197,7 @@ To ensure semantic diversity and reasoning complexity, we propose a semantics-aw
 
     <!-- Leaderboard Tabs -->
     <section class="card" id="leaderboard-card">
+      <h2 class="section-title">🏆 Leaderboard</h2>
       <div class="tabs">
         <div class="tab active" data-target="dep">Dependency Classification</div>
         <div class="tab" data-target="trace">Trace Generation</div>
@@ -259,7 +280,7 @@ To ensure semantic diversity and reasoning complexity, we propose a semantics-aw
 
     <!-- Citation -->
     <section class="card citation-card">
-      <h2>Citation</h2>
+      <h2 class="section-title">📝 Citation</h2>
       <pre><code class="citation-code">@article{xie2025core,
   title={CORE: Benchmarking LLMs Code Reasoning Capabilities through Static Analysis Tasks},
   author={Xie, Danning and Zheng, Mingwei and Liu, Xuwei and Wang, Jiannan and Wang, Chengpeng and Tan, Lin and Zhang, Xiangyu},
